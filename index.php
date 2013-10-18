@@ -17,6 +17,17 @@
 			array_push($pages, $x);
 	}
 	
+	// Sort list of pages
+	$page_rank = array("home" => 4, "the_grid"=> 3, "projects" => 2, "about"=> 1);
+	function getPageRank($a, $b)
+	{
+		global $page_rank;
+		if (isset($page_rank[$a]) and isset($page_rank[$b]))
+        	return ($page_rank[$a] > $page_rank[$b]) ? -1 : 1;
+		return 0;
+	}
+	usort ($pages, "getPageRank");
+	
 	// Decide 404
 	$ERROR_404 = true;
 	if(in_array($requested_page, $pages))
@@ -53,7 +64,9 @@
 			include "_pages/_404/404.html";
 		}
 		else{
-			echo "Valid Page";
+			foreach($pages as $x){
+					include '/var/www/_pages/' . $x . '/' . $x . '.html';
+			}
 		}
 	?>
 </body>
