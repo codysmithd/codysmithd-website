@@ -1,0 +1,33 @@
+.navbar-current_link {
+	color:rgba(0,0,0,0.75) !important;
+}
+
+#navbar_container{
+	z-index: 10;
+	background-color:#FFF;
+	background-color: rgba(255,255,255,0.75);
+	position:fixed;
+	bottom:0%;
+	width:100%;
+	margin-bottom:5%;
+}
+
+#navbar_container > ul{
+	list-style-type:none;
+	padding: 0px;
+	margin:  0px;
+}
+
+#navbar_container > ul > a {
+	cursor: pointer;
+}
+
+#navbar_container > ul > a > li {
+	color: rgba(0,0,0,.3);
+	float:left;
+	font-size:26px;
+	padding: 30px 15px 30px 15px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 400;
+}
+

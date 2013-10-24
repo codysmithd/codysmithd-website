@@ -3,6 +3,8 @@
 <?php
 	// Figure out which page has been requested
 	$requested_page = substr($_SERVER['REQUEST_URI'], 1); //strip off first slash
+	if ($requested_page == '')
+		$requested_page = 'home';
 	for($i=0;$i<strlen($requested_page);$i++) { // Find the page part of the URL
     	 if(strpos("?#/",$requested_page[$i]) !== false){
     	 	$requested_page = substr($requested_page, 0, $i);
@@ -13,7 +15,7 @@
 	// Make list of valid pages
 	$pages = array();
 	foreach(scandir("/var/www/_pages") as $x){
-		if($x != '.' and $x != '..' and $x[0] != '_' and file_exists('/var/www/_pages/' . $x . '/' . $x . '.html'))
+		if($x != '.' and $x != '..' and $x[0] != '_' and file_exists("/var/www/_pages/$x/$x.html"))
 			array_push($pages, $x);
 	}
 	
@@ -45,28 +47,54 @@
 <body>
 	<?php
 		//Include page style-sheets
+		echo '<style>';
 		if($ERROR_404 and file_exists('/var/www/_pages/_404/404.css')){
-			echo '<style>';
 			include '/var/www/_pages/_404/404.css';
-			echo '</style>';
 		}
 		else{
-			echo '<style>';
 			foreach($pages as $x){
-				if(file_exists('/var/www/_pages/' . $x . '/' . $x . '.css'))
-					include '/var/www/_pages/' . $x . '/' . $x . '.css';
+				if(file_exists("/var/www/_pages/$x/$x.css"))
+					include "/var/www/_pages/$x/$x.css";
 			}
-			echo '</style>';
+			
 		}
+		foreach(scandir("/var/www/_includes") as $x){
+				if(file_exists("/var/www/_includes/$x/$x.css"))
+					include "/var/www/_includes/$x/$x.css";
+			}
+		echo '</style>';
 		
-		// Include pages
+		// Include _pages
 		if($ERROR_404){
 			include "_pages/_404/404.html";
 		}
 		else{
 			foreach($pages as $x){
-					include '/var/www/_pages/' . $x . '/' . $x . '.html';
+					$handle = @fopen("/var/www/_pages/$x/$x.html", "r");
+					$needle = "class=\"frame\"";
+					$adjusted_class = "class=\"frame\"";
+					if ($handle) {
+					    while (($buffer = fgets($handle)) !== false) {
+					    	// include classes for frames
+							if(array_search($x, $pages) > array_search($requested_page, $pages))
+								$adjusted_class = "class=\"frame frame_right frame_inactive\"";
+							else if(array_search($x, $pages) < array_search($requested_page, $pages))
+								$adjusted_class = "class=\"frame frame_left frame_inactive\"";
+					    	$buffer = str_replace ($needle, $adjusted_class, $buffer);
+					        echo $buffer;
+					    }
+					    fclose($handle);
+					}
 			}
+			
+			// Include _includes
+			foreach(scandir("/var/www/_includes") as $x){
+				if(file_exists("/var/www/_includes/$x/$x.html"))
+					include "/var/www/_includes/$x/$x.html";
+				else if(file_exists("/var/www/_includes/$x/$x.php"))
+					include "/var/www/_includes/$x/$x.php";
+			}
+			
 		}
 	?>
 </body>
