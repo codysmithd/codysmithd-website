@@ -42,6 +42,20 @@
 	<link href="global.css" rel="stylesheet" type="text/css" />
 	<link href='http://fonts.googleapis.com/css?family=Raleway:700,400,100' rel='stylesheet' type='text/css'>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<?php
+		// include _includes javascript
+		$path = "_includes";
+		foreach(scandir("/var/www/$path") as $x){
+		if($x != '.' and $x != '..' and $x[0] != '_' and file_exists("$path/$x/$x.php"))
+			echo "<script type=\"text/javascript\" src=\"/$path/$x/$x.js\"></script>";
+		}
+		// include _pages javascript
+		$path = "_pages";
+		foreach(scandir("/var/www/$path") as $x){
+		if($x != '.' and $x != '..' and $x[0] != '_' and file_exists("$path/$x/$x.php"))
+			echo "<script type=\"text/javascript\" src=\"$/path/$x/$x.js\"></script>";
+		}
+	?>
 </head>
 
 <body>
