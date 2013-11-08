@@ -8,7 +8,7 @@
 	margin: 10px 0 0 15px;
 }
 
-.navbar-current_link {
+.navbar-current_link > li{
 	color:rgba(0,0,0,0.75) !important;
 }
 

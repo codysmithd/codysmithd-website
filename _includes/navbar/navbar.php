@@ -21,7 +21,7 @@
 			$href = "";
 		
 		echo
-		"<a id=\"link-$x\" href=\"/$href\"><li class=\"$class\">$pagename</li></a>";
+		"<a id=\"link-$x\" href=\"/$href\" class=\"$class\"><li>$pagename</li></a>";
 	}
 	?>
 	</ul>

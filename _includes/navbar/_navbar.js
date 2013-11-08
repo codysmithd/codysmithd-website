@@ -28,39 +28,49 @@ $(document).ready(function() {
  });
 
 function changePage(next_page){
-	if(next_page != current_page){
-		
+	
+	if (next_page != current_page) {
+
 		// Setup Transition
-		for(var i=0; i<pages.length; i++){
-			if(i != current_page && i != next_page){
+		for (var i = 0; i < pages.length; i++) {
+			if (i != current_page && i != next_page) {
 				page_divs[i].style.zIndex = 1;
-				if(i < next_page)
+				if (i < next_page)
 					page_divs[i].setAttribute("class", "frame frame_left frame_inactive");
 				else
 					page_divs[i].setAttribute("class", "frame frame_right frame_inactive");
 			}
 		}
-		
+
 		page_divs[next_page].style.zIndex = 3;
-		page_divs[current_page].style.zIndex = 2; 
+		page_divs[current_page].style.zIndex = 2;
 		$(page_divs[next_page]).removeClass("frame_inactive");
-		
-		if(next_page > current_page)
-			animation_value = {left: "-=100%"};
+
+		if (next_page > current_page)
+			animation_value = {
+				left : "-100%"
+			};
 		else
-			animation_value = {right: "-=100%"};
-		
-		$( page_divs[current_page] ).animate(
-    		animation_value, 500, "swing", function() {
-    			finish_transition(next_page);
-  			});
-  		$( page_divs[next_page] ).animate(
-  			animation_value, 500, "swing", function() {
-    			finish_transition(next_page);
-  			});
-		
-		window.history.pushState("", "codysmithd", "/" + pages[next_page]); // Adjust URL
+			animation_value = {
+				right : "-100%"
+			};
+		animation_settings = {
+			duration : 5000,
+			queue : false,
+
+		};
+
+		$(page_divs[current_page]).transition(animation_value, animation_settings, function() {
+			finish_transition(next_page);
+		});
+		$(page_divs[next_page]).transition(animation_value, animation_settings, function() {
+			finish_transition(next_page);
+		});
+
+		window.history.pushState("", "codysmithd", "/" + pages[next_page]);
+		// Adjust URL
 	}
+
 }
 
 function finish_transition(next_page){

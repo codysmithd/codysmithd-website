@@ -1,9 +1,10 @@
 #frame_home{	
-	background:url(/_pages/home/home_wallpaper.jpg);
+	/*background:url(/_pages/home/home_wallpaper.jpg);
 	background-repeat:no-repeat;
 	background-position:center;
 	-webkit-background-size: cover;
 	-moz-background-size:	 cover;
 	-o-background-size:		 cover;
-	background-size: 		 cover;
+	background-size: 		 cover;*/
+	background:#606060;
 }

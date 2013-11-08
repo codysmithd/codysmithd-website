@@ -46,14 +46,21 @@
 		// include _includes javascript
 		$path = "_includes";
 		foreach(scandir("/var/www/$path") as $x){
-		if($x != '.' and $x != '..' and $x[0] != '_' and file_exists("$path/$x/$x.php"))
+		if($x != '.' and $x != '..' and $x[0] != '_' and file_exists("$path/$x/$x.js"))
 			echo "<script type=\"text/javascript\" src=\"/$path/$x/$x.js\"></script>";
 		}
 		// include _pages javascript
 		$path = "_pages";
 		foreach(scandir("/var/www/$path") as $x){
 		if($x != '.' and $x != '..' and $x[0] != '_' and file_exists("$path/$x/$x.php"))
-			echo "<script type=\"text/javascript\" src=\"$/path/$x/$x.js\"></script>";
+			echo "<script type=\"text/javascript\" src=\"/$path/$x/$x.js\"></script>";
+		}
+		
+		// include _script
+		$path = "_script";
+		foreach(scandir("/var/www/$path") as $x){
+		if($x != '.' and $x != '..' and $x[0] != '_')
+			echo "<script type=\"text/javascript\" src=\"/$path/$x\"></script>";
 		}
 	?>
 </head>
@@ -83,23 +90,23 @@
 			include "_pages/_404/404.html";
 		}
 		else{
+			echo "<div class=\"layer-0\">";
 			foreach($pages as $x){
 					$handle = @fopen("/var/www/_pages/$x/$x.html", "r");
 					$needle = "class=\"frame\"";
 					$adjusted_class = "class=\"frame\"";
 					if ($handle) {
 					    while (($buffer = fgets($handle)) !== false) {
-					    	// include classes for frames
-							if(array_search($x, $pages) > array_search($requested_page, $pages))
-								$adjusted_class = "class=\"frame frame_right frame_inactive\"";
-							else if(array_search($x, $pages) < array_search($requested_page, $pages))
-								$adjusted_class = "class=\"frame frame_left frame_inactive\"";
+					    	// Turn off all in-active frames
+							if(array_search($x, $pages) != array_search($requested_page, $pages))
+								$adjusted_class = "class=\"frame frame_inactive\"";
 					    	$buffer = str_replace ($needle, $adjusted_class, $buffer);
 					        echo $buffer;
 					    }
 					    fclose($handle);
 					}
 			}
+			echo "</div>";
 			
 			// Include _includes
 			foreach(scandir("/var/www/_includes") as $x){
