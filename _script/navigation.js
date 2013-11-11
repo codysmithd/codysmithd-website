@@ -1,11 +1,15 @@
 var pages        = new Array(); // List of pages
 var page_divs    = new Array(); // Array of page divs
 var div_height   = 0;           // Height of each element [px]
-var current_page = 0;
-var parent       = null;
+var current_page = 0;           // Current page taking up most of the screen
+var current_full_page = 0;      // Current FULL page
+var parent       = null;        // The huge scrolling element
 
 var scroll_snap_timer;               // The timer used to decide when to snap
-var parallaxFunctions = new Array(); // Array of functions called when scrolling occurs
+
+var readyFunctions       = new Array(); // Array of functions called when the document is ready
+var parallaxFunctions    = new Array(); // Array of functions called when scrolling occurs
+var changePageFunctions  = new Array(); // Array of function called when a new page is detected
 
 $(document).ready(function() {
 	
@@ -34,13 +38,15 @@ $(document).ready(function() {
 	else
 		current_page = 0;
 	
+	// Prepare Parent
 	parent = $(".layer-0");
 	parent.css("height", "100%");
 	
-	div_height = page_divs[0].height();
+	div_height = page_divs[0].height(); // Get page div height
 	
-	parent.scrollTop(current_page * div_height);
+	parent.scrollTop(current_page * div_height); // Scroll to the current page
 	
+	// Setup scroll handler
 	parent.scroll(function(){
     	parallaxScroll();
 	});
@@ -49,6 +55,13 @@ $(document).ready(function() {
 
 	// Stop snap animation when user provides input
 	window.onmousewheel = document.onmousewheel = document.onkeydown = function(){ parent.stop(); };
+	
+	// Re-evaluate the div_height when the page re-sizes
+	window.onresize = function(){ div_height = page_divs[0].height(); };
+	
+	// Call the other element's ready functions
+	for(var i = 0; i < readyFunctions.length; i++)
+		readyFunctions[i]();
 	
  });
  
@@ -61,40 +74,47 @@ function parallaxScroll(){
 		changePage();
 	}
 	
-	evaulateSnapEffect();
+	// If we just exactly touched a page
+	if(parent.scrollTop()%div_height == 0){
+		
+		current_full_page = Math.floor(parent.scrollTop()/div_height);
+		
+		// Call other element's change page functions
+		for(var i = 0; i < changePageFunctions.length; i++)
+			changePageFunctions[i]();
+	}
 	
+	evaulateSnapEffect(); // Snap if we need to
+	
+	// Call other elements's scroll functions
 	for(var i = 0; i < parallaxFunctions.length; i++)
-		parallaxFunction[i]();
+		parallaxFunctions[i]();
 	
 }
 
 // Change the current page
 function changePage(newPage){
-	updateNavbar();
+	
+	// Change the URL
 	if(current_page != 0)
 		window.history.pushState("", "codysmithd", "/" + pages[current_page]);
 	else
 		window.history.pushState("", "codysmithd", "/");
+	
+	// Scroll to the new page (if specified)
 	if(newPage !== undefined && newPage != current_page){
 		parent.animate({ scrollTop: newPage * div_height + "px" }, 600);
 	}
+	
 }
 
 // Snap to the next page in case of in-between scrolling
 function evaulateSnapEffect(){
+	
 	window.clearTimeout(scroll_snap_timer); // Interrupt Timer
+	
 	scroll_snap_timer = window.setTimeout(
 		function(){
 			parent.animate({ scrollTop: current_page * div_height + "px" }, 300);
 		}, 600);		
-}
-
-// Update the navigation bar
-function updateNavbar(){
-	for(var i = 0; i < pages.length; i++){
-		if(i == current_page)
-			document.getElementById("link-" + pages[i]).className = 'navbar-current_link';
-		else
-			document.getElementById("link-" + pages[i]).className = '';
-	}
 }
