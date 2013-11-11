@@ -1,4 +1,8 @@
-<div id="navbar_container" class="">
+<?php 
+	// Get class
+	$class = "navbar_container-" . $requested_page;
+	echo "<div id=\"navbar_container\" class=\"$class\">";
+?>
 	<span id="navbar_logo"></span>
 	<ul>
 	<?php

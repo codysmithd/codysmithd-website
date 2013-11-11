@@ -12,16 +12,19 @@
 	color:rgba(0,0,0,0.75) !important;
 }
 
+
 #navbar_container{
 	z-index: 10;
 	background-color:#FFF;
 	background-color: rgba(255,255,255,0.75);
 	position:fixed;
-	bottom:0%;
 	width:100%;
-	margin-bottom:3%;
+	
+	transition:         .2s;
+	-moz-transition:    .2s;
+	-webkit-transition: .2s;
+	-o-transition:      .2s;
 }
-
 #navbar_container > ul{
 	list-style-type:none;
 	padding: 0px;
@@ -53,3 +56,38 @@
 	color: rgba(0,153,204,.8);
 }
 
+
+/* HOME */
+.navbar_container-home{
+	bottom:0;
+	background-color:rgba(255,255,255,0.75) !important;
+}
+
+/* THE GRID */
+.navbar_container-the_grid{
+	top:0;
+	background-color:#000 !important;
+	border-bottom: 1px solid #333;
+}
+.navbar_container-the_grid > ul > .navbar-current_link > li{
+	color:#33B5E5 !important; 
+}
+.navbar_container-the_grid > ul > .navbar-current_link > li:hover{
+	color:#33B5E5 !important; 
+}
+.navbar_container-the_grid > ul > a > li {
+	color: rgba(255,255,255,.25) !important;
+}
+.navbar_container-the_grid > ul > a > li:hover {
+	color: #FFF !important;
+}
+
+/* Projects */
+.navbar_container-projects{
+	top:0;
+}
+
+/* About */
+.navbar_container-about{
+	top:0;
+}
