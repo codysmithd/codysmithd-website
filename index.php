@@ -40,9 +40,17 @@
 	<title>CodySmithD</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="global.css" rel="stylesheet" type="text/css" />
-	<link href='http://fonts.googleapis.com/css?family=Raleway:700,400,100' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Raleway:700,400,100&effect=3d-float' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Berkshire+Swash' rel='stylesheet' type='text/css'>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<?php
+		// include _script
+		$path = "_script";
+		foreach(scandir("/var/www/$path") as $x){
+		if($x != '.' and $x != '..' and $x[0] != '_')
+			echo "<script type=\"text/javascript\" src=\"/$path/$x\"></script>";
+		}
+		
 		// include _includes javascript
 		$path = "_includes";
 		foreach(scandir("/var/www/$path") as $x){
@@ -52,15 +60,8 @@
 		// include _pages javascript
 		$path = "_pages";
 		foreach(scandir("/var/www/$path") as $x){
-		if($x != '.' and $x != '..' and $x[0] != '_' and file_exists("$path/$x/$x.php"))
+		if($x != '.' and $x != '..' and $x[0] != '_' and file_exists("$path/$x/$x.js"))
 			echo "<script type=\"text/javascript\" src=\"/$path/$x/$x.js\"></script>";
-		}
-		
-		// include _script
-		$path = "_script";
-		foreach(scandir("/var/www/$path") as $x){
-		if($x != '.' and $x != '..' and $x[0] != '_')
-			echo "<script type=\"text/javascript\" src=\"/$path/$x\"></script>";
 		}
 	?>
 </head>
