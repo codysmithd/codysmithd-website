@@ -59,9 +59,22 @@
 
 /* HOME */
 .navbar_container-home{
-	bottom:0;
-	background-color:rgba(255,255,255,0.75) !important;
+	top:0;
+	background-color: rgba(0,0,0,0.15) !important;
+	border-bottom: 1px solid rgba(0,0,0,0.3); !important;
 }
+.navbar_container-home > ul > .navbar-current_link > li{
+	color:#FFF !important; 
+}.navbar_container-home > ul > .navbar-current_link > li:hover{
+	color:#FFF !important; 
+}
+.navbar_container-home > ul > a > li {
+	color: rgba(255,255,255,.6) !important;
+}
+.navbar_container-home > ul > a > li:hover {
+	color: #33b5e5 !important;
+}
+
 
 /* THE GRID */
 .navbar_container-the_grid{
@@ -71,8 +84,7 @@
 }
 .navbar_container-the_grid > ul > .navbar-current_link > li{
 	color:#33B5E5 !important; 
-}
-.navbar_container-the_grid > ul > .navbar-current_link > li:hover{
+}.navbar_container-the_grid > ul > .navbar-current_link > li:hover{
 	color:#33B5E5 !important; 
 }
 .navbar_container-the_grid > ul > a > li {
@@ -85,9 +97,19 @@
 /* Projects */
 .navbar_container-projects{
 	top:0;
+	background-color:rgba(255,255,255,0.25) !important;
 }
 
 /* About */
 .navbar_container-about{
 	top:0;
+	background-color:rgba(0,0,0,0.25) !important;
+}
+.navbar_container-about > ul > .navbar-current_link > li{
+	color:#33B5E5 !important; 
+}.navbar_container-about > ul > .navbar-current_link > li:hover{
+	color:#33B5E5 !important; 
+}
+.navbar_container-about > ul > a > li:hover {
+	color: rgba(0,0,0,0.7) !important;
 }
