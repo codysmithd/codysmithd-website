@@ -10,6 +10,7 @@ var scroll_snap_timer;               // The timer used to decide when to snap
 var readyFunctions       = new Array(); // Array of functions called when the document is ready
 var parallaxFunctions    = new Array(); // Array of functions called when scrolling occurs
 var changePageFunctions  = new Array(); // Array of function called when a new page is detected
+var newFullPageFunctions = new Array(); // Array of function called when a new full page is present
 
 $(document).ready(function() {
 	
@@ -37,6 +38,7 @@ $(document).ready(function() {
 		current_page = pages.indexOf(pageFromURL);
 	else
 		current_page = 0;
+	current_full_page = current_page;
 	
 	// Prepare Parent
 	parent = $(".layer-0");
@@ -65,23 +67,22 @@ $(document).ready(function() {
 	
  });
  
-// Called every time the pages get a scroll
+// Called every time the page get a scroll
 function parallaxScroll(){
 	
-	// If we just changed what page we are on
+	// If we are more on one page than another
 	if(current_page != Math.round(parent.scrollTop()/div_height)){
 		current_page = Math.round(parent.scrollTop()/div_height);
 		changePage();
 	}
 	
-	// If we just exactly touched a page
-	if(parent.scrollTop()%div_height == 0){
+	// If we just gave full view to a new page
+	if( Math.abs(current_full_page*div_height - parent.scrollTop()) >= div_height ){
 		
 		current_full_page = Math.floor(parent.scrollTop()/div_height);
-		
 		// Call other element's change page functions
-		for(var i = 0; i < changePageFunctions.length; i++)
-			changePageFunctions[i]();
+		for(var i = 0; i < newFullPageFunctions.length; i++)
+			newFullPageFunctions[i]();
 	}
 	
 	evaulateSnapEffect(); // Snap if we need to
@@ -106,6 +107,9 @@ function changePage(newPage){
 		parent.animate({ scrollTop: newPage * div_height + "px" }, 600);
 	}
 	
+	// Call other element's change page functions
+	for(var i = 0; i < changePageFunctions.length; i++)
+		changePageFunctions[i]();
 }
 
 // Snap to the next page in case of in-between scrolling
