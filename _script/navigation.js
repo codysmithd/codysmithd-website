@@ -1,9 +1,9 @@
-var pages        = new Array(); // List of pages
-var page_divs    = new Array(); // Array of page divs
-var div_height   = 0;           // Height of each element [px]
-var current_page = 0;           // Current page taking up most of the screen
-var current_full_page = 0;      // Current FULL page
-var parent       = null;        // The huge scrolling element
+var pages             = new Array(); // List of pages
+var page_divs         = new Array(); // Array of page divs
+var div_height        = 0;           // Height of each element [px]
+var current_page      = 0;           // Current page taking up most of the screen
+var current_full_page = 0;           // Current FULL page
+var parent            = null;        // The huge scrolling element
 
 var scroll_snap_timer;               // The timer used to decide when to snap
 
