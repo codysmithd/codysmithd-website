@@ -15,7 +15,7 @@
 	// Make list of valid pages
 	$pages = array();
 	foreach(scandir("/var/www/_pages") as $x){
-		if($x != '.' and $x != '..' and $x[0] != '_' and file_exists("/var/www/_pages/$x/$x.html"))
+		if($x != '.' and $x != '..' and $x[0] != '_' and (file_exists("/var/www/_pages/$x/$x.html") or file_exists("/var/www/_pages/$x/$x.php")))
 			array_push($pages, $x);
 	}
 	
@@ -41,27 +41,34 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="global.css" rel="stylesheet" type="text/css" />
 	<link href='http://fonts.googleapis.com/css?family=Raleway:700,400,100&effect=3d-float' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Berkshire+Swash' rel='stylesheet' type='text/css'>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<?php
-		// include _script
-		$path = "_script";
-		foreach(scandir("/var/www/$path") as $x){
-		if($x != '.' and $x != '..' and $x[0] != '_')
-			echo "<script type=\"text/javascript\" src=\"/$path/$x\"></script>";
+		if($ERROR_404){
+			$path = "_pages";
+			if(file_exists("$path/_404/404.js"))
+				echo "<script type=\"text/javascript\" src=\"/$path/_404/404.js\"></script>";
 		}
-		
-		// include _includes javascript
-		$path = "_includes";
-		foreach(scandir("/var/www/$path") as $x){
-		if($x != '.' and $x != '..' and $x[0] != '_' and file_exists("$path/$x/$x.js"))
-			echo "<script type=\"text/javascript\" src=\"/$path/$x/$x.js\"></script>";
-		}
-		// include _pages javascript
-		$path = "_pages";
-		foreach(scandir("/var/www/$path") as $x){
-		if($x != '.' and $x != '..' and $x[0] != '_' and file_exists("$path/$x/$x.js"))
-			echo "<script type=\"text/javascript\" src=\"/$path/$x/$x.js\"></script>";
+		else{
+			// include _script
+			$path = "_script";
+			foreach(scandir("/var/www/$path") as $x){
+			if($x != '.' and $x != '..' and $x[0] != '_')
+				echo "<script type=\"text/javascript\" src=\"/$path/$x\"></script>";
+			}
+			
+			// include _includes javascript
+			$path = "_includes";
+			foreach(scandir("/var/www/$path") as $x){
+			if($x != '.' and $x != '..' and $x[0] != '_' and file_exists("$path/$x/$x.js"))
+				echo "<script type=\"text/javascript\" src=\"/$path/$x/$x.js\"></script>";
+			}
+			
+			// include _pages javascript
+			$path = "_pages";
+			foreach(scandir("/var/www/$path") as $x){
+			if($x != '.' and $x != '..' and $x[0] != '_' and file_exists("$path/$x/$x.js"))
+				echo "<script type=\"text/javascript\" src=\"/$path/$x/$x.js\"></script>";
+			}
 		}
 	?>
 </head>
@@ -93,7 +100,10 @@
 		else{
 			echo "<div class=\"layer-0\">";
 			foreach($pages as $x){
-					$handle = @fopen("/var/www/_pages/$x/$x.html", "r");
+					if(file_exists("/var/www/_pages/$x/$x.html"))
+						$handle = @fopen("/var/www/_pages/$x/$x.html", "r");
+					elseif (file_exists("/var/www/_pages/$x/$x.php"))
+						$handle = @fopen("/var/www/_pages/$x/$x.php", "r");
 					$needle = "class=\"frame\"";
 					$adjusted_class = "class=\"frame\"";
 					if ($handle) {
