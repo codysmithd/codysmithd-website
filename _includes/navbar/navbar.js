@@ -1,20 +1,19 @@
-var navbar_parent = null;
-var navbar_height = 0;
+var navbar_parent = null;     // The navbar parent div
+var navbar_height = 0;        // The height of the navbar div
 
 readyFunctions.push(function(){
 	navbar_parent = $("#navbar_container");
 	navbar_height = navbar_parent.height();
 });
 
-// Changes the scrolling behavior depending on the page
+// Called every time the page is scrolled
 parallaxFunctions.push(function(){
-	// Going up
-	if( (current_full_page*div_height) - parent.scrollTop() > navbar_height){
-		navbar_parent.attr("class", "navbar_container-" + pages[current_full_page-1]);
-	}
-	else{
+	
+	if( (current_full_page*div_height) - parent.scrollTop() > navbar_height)
+		navbar_parent.attr("class", "navbar_container-" + pages[current_full_page - 1]);
+	else
 		navbar_parent.attr("class", "navbar_container-" + pages[current_full_page]);
-	}
+        
 });
 
 
@@ -26,5 +25,4 @@ changePageFunctions.push(function(){
 		else
 			document.getElementById("link-" + pages[i]).className = '';
 	}
-	//navbar_parent.attr("class", "navbar_container-" + pages[current_page]);
 });
