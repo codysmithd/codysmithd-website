@@ -40,7 +40,7 @@
 	<title>CodySmithD</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="global.css" rel="stylesheet" type="text/css" />
-	<link href='http://fonts.googleapis.com/css?family=Raleway:700,400,100&effect=3d-float' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Raleway:700,600,400,200&effect=3d-float' rel='stylesheet' type='text/css'>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<?php
 		if($ERROR_404){
