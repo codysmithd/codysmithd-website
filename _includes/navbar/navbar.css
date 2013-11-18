@@ -5,7 +5,12 @@
 	background-repeat:no-repeat;
 	width:70px;
 	height:70px;
-	margin: 10px 0 0 15px;
+	margin: 10px 15px 0 15px;
+	
+	transition:         .5s;
+	-moz-transition:    .5s;
+	-webkit-transition: .5s;
+	-o-transition:      .5s;
 }
 
 .navbar-current_link > li{
@@ -44,7 +49,7 @@
 	font-size:26px;
 	padding: 30px 15px 30px 15px;
 	font-family: 'Raleway', sans-serif;
-	font-weight: 400;
+	font-weight: 600;
 	
 	transition:         .2s;
 	-moz-transition:    .2s;
@@ -60,7 +65,13 @@
 /* HOME */
 .navbar_container-home{
 	top:0;
-	background-color: rgba(0,0,0,0.1) !important;
+	background: -moz-linear-gradient(top,  rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 100%)!important; /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.45)), color-stop(100%,rgba(0,0,0,0)))!important; /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%)!important; /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%)!important; /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%)!important; /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%)!important; /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#73000000', endColorstr='#00000000',GradientType=0 )!important; /* IE6-9 */
 }
 .navbar_container-home > ul > .navbar-current_link > li{
 	color:#33b5e5 !important; 
@@ -96,7 +107,11 @@
 /* Projects */
 .navbar_container-projects{
 	top:0;
-	background-color:rgba(255,255,255,0.25) !important;
+	background-color: #EFEFEF !important;
+}
+
+.navbar_container-projects > #navbar_logo{
+	-webkit-filter: brightness(0);
 }
 
 /* About */
@@ -104,10 +119,15 @@
 	top:0;
 	background-color:rgba(0,0,0,0.25) !important;
 }
+.navbar_container-about > #navbar_logo{
+	-webkit-filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.25));
+}
 .navbar_container-about > ul > .navbar-current_link > li{
-	color:#33B5E5 !important; 
+	color:#33B5E5 !important;
+	-webkit-filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.25));
 }.navbar_container-about > ul > .navbar-current_link > li:hover{
 	color:#33B5E5 !important; 
+	-webkit-filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.25));
 }
 .navbar_container-about > ul > a > li:hover {
 	color: rgba(0,0,0,0.7) !important;
