@@ -106,13 +106,29 @@
 						$handle = @fopen("/var/www/_pages/$x/$x.php", "r");
 					$needle = "class=\"frame\"";
 					$adjusted_class = "class=\"frame\"";
+					$php_buffer = "";
 					if ($handle) {
 					    while (($buffer = fgets($handle)) !== false) {
-					    	// Turn off all in-active frames
-							if(array_search($x, $pages) != array_search($requested_page, $pages))
-								$adjusted_class = "class=\"frame frame_inactive\"";
-					    	$buffer = str_replace ($needle, $adjusted_class, $buffer);
+					    		
+					    	// PHP code mode
+					    	if(trim($buffer) == "<?php" or $php_buffer != ""){
+					    		$php_buffer .= $buffer;
+					    		if(trim($buffer) == "?>"){
+					    			$php_buffer = str_replace("<?php", "", $php_buffer);
+									$php_buffer = str_replace("?>", "", $php_buffer);
+					    			eval($php_buffer);
+									$php_buffer = "";
+					    		}
+					    	}
+							
+							// HTML mode
+							else{
+								if(array_search($x, $pages) != array_search($requested_page, $pages))
+									$adjusted_class = "class=\"frame frame_inactive\"";
+					    		$buffer = str_replace ($needle, $adjusted_class, $buffer);
 					        echo $buffer;
+							}
+					    	
 					    }
 					    fclose($handle);
 					}
