@@ -3,6 +3,115 @@
 	overflow:hidden;
 }
 
+/* POSTS */
+
+#the_grid-posts_wrapper{
+	display:table;
+	width:100%;
+	height:100%;
+	position: absolute;
+	z-index: 3;
+}
+#the_grid-posts{
+	display: table-cell;
+	overflow-x:scroll;
+	padding: 0 15px 0 15px;
+	vertical-align:middle;
+}
+.the_grid-post{
+	display:inline-block;
+	height:80%;
+	/*Leave room for the navbar!*/
+	height:calc(100% - 206px);
+	margin-top:92px;
+	color: #E0E0E0;
+	font-family: 'Arimo', sans-serif;
+	column-width: 400px;
+  	column-gap: 15px;
+  	-webkit-column-width: 400px;
+  	-webkit-column-gap: 15px;
+}
+.the_grid-post > hr{
+	border: 0;
+    height: 1px;
+    background-color: #555;
+}
+.the_grid-post > h1{
+	font-size:90px;
+	color:#33B5E5;
+	font-weight:200;
+	margin:0;
+	font-family: 'Raleway', sans-serif;
+}
+.the_grid-post > h2{
+	font-size:24px;
+	color:#959595;
+	font-weight:400;
+	margin:0;
+	font-family: 'Raleway', sans-serif;
+}
+.the_grid-post > h3{
+	font-size: 20px;
+	color:#333333;
+	font-weight:400;
+	margin:0;
+	font-family: 'Raleway', sans-serif;
+}
+.the_grid-post > p > a{
+	text-decoration:none;
+	color:#33b5e5;
+}.the_grid-post > p > a:visited{
+	color:#FFF;
+}
+
+/* NAVIGATION */
+
+#the_grid-navigation_wrapper{
+	position: absolute;
+	bottom:0;
+	margin-bottom: 20px;
+	height:32px;
+	border: #333 solid 1px;
+	background-color:rgba(0,0,0,0.9);
+	z-index: 4;
+	margin-left:auto;
+	margin-right:auto;
+	left:0;
+	right:0;
+	transition:         .5s;
+	-moz-transition:    .5s;
+	-webkit-transition: .5s;
+	-o-transition:      .5s;
+	width:60px;
+}#the_grid-navigation_wrapper:hover{
+	border-color:#555;
+}#the_grid-navigation_wrapper:hover > .the_grid-navigation_link{
+	border-color:#555;
+}#the_grid-navigation_wrapper:hover > .the_grid-navigation_link-current{
+	background-color:#555;
+}
+
+.the_grid-navigation_link{
+	display:inline-block;
+	width: 20px;
+	height:20px;
+	margin: 5px 0 5px 5px;
+	float:left;
+	border:#333 solid 1px;
+	cursor:pointer;
+	transition:         .5s;
+	-moz-transition:    .5s;
+	-webkit-transition: .5s;
+	-o-transition:      .5s;
+}
+.the_grid-navigation_link-current{
+	background-color:#333;
+	border-style:hidden;
+	margin:6px 1px 6px 6px;
+}
+
+
+/* BACKGROUND */
 #the_grid-background{
 	position:absolute;
 	top:0;
