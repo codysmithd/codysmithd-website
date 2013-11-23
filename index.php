@@ -2,15 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" style="width:100%; height:100%; font-family:Arial, Helvetica, sans-serif;">
 <?php
 	// Figure out which page has been requested
-	$requested_page = substr($_SERVER['REQUEST_URI'], 1); //strip off first slash
-	if ($requested_page == '')
-		$requested_page = 'home';
-	for($i=0;$i<strlen($requested_page);$i++) { // Find the page part of the URL
+	$requested_page = substr($_SERVER['REQUEST_URI'], 1); // Strip off first slash
+	// Find the page (and subpage) part of the URL
+	for($i=0;$i<strlen($requested_page);$i++) { 
     	 if(strpos("?#/",$requested_page[$i]) !== false){
+    	 	if($requested_page[$i] === "/")
+				$subpage = substr($requested_page, $i);
     	 	$requested_page = substr($requested_page, 0, $i);
 			break;
     	 }
 	}
+	if ($requested_page == '')
+		$requested_page = 'home';
 	
 	// Make list of valid pages
 	$pages = array();
@@ -39,7 +42,7 @@
 <head>
 	<title>CodySmithD</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="global.css" rel="stylesheet" type="text/css" />
+	<link href="/global.css" rel="stylesheet" type="text/css" />
 	<link href='http://fonts.googleapis.com/css?family=Raleway:700,600,400,200&effect=3d-float' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
