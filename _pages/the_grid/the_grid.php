@@ -8,6 +8,7 @@
 							if($x != "." and $x != ".."){
 								echo "<div class=\"the_grid-post\">";
 								parse_and_output_file("/var/www/_pages/the_grid/posts/$x");
+								// echo $subpage;
 								echo "</div>";
 							}
 						}
@@ -15,6 +16,13 @@
 				</div>
 			</div>
 		<div id="the_grid-navigation_wrapper">
+			<?php
+				//foreach(scandir("/var/www/_pages/the_grid/posts") as $x){
+					//if($x != "." and $x != ".."){
+						//echo "<a href=\"/the_grid/$x\"><div class=\"the_grid-navigation_link\"></div></a>";
+					//}
+				//}
+			?>
 			<div class="the_grid-navigation_link the_grid-navigation_link-current"></div>
 			<div class="the_grid-navigation_link"></div>
 		</div>
