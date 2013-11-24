@@ -8,7 +8,7 @@
 							if($x != "." and $x != ".."){
 								echo "<div class=\"the_grid-post\">";
 								parse_and_output_file("/var/www/_pages/the_grid/posts/$x");
-								// echo $subpage;
+								echo $subpage;
 								echo "</div>";
 							}
 						}
