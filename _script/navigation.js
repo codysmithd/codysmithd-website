@@ -1,16 +1,17 @@
-var pages             = new Array(); // List of pages
-var page_divs         = new Array(); // Array of page divs
-var div_height        = 0;           // Height of each element [px]
-var current_page      = 0;           // Current page taking up most of the screen
-var current_full_page = 0;           // Current FULL page
-var parent            = null;        // The huge scrolling element
+var pages             = new Array();    // List of pages
+var page_divs         = new Array();    // Array of page divs
+var div_height        = 0;              // Height of each element [px]
+var current_page      = 0;              // Current page taking up most of the screen
+var current_full_page = 0;              // Current FULL page
+var parent            = null;           // The huge scrolling element
 
-var scroll_snap_timer;               // The timer used to decide when to snap
+var scroll_snap_timer;                  // The timer used to decide when to snap
 
 var readyFunctions       = new Array(); // Array of functions called when the document is ready
 var parallaxFunctions    = new Array(); // Array of functions called when scrolling occurs
 var changePageFunctions  = new Array(); // Array of function called when a new page is detected
 var newFullPageFunctions = new Array(); // Array of function called when a new full page is present
+
 
 $(document).ready(function() {
 	
@@ -80,6 +81,7 @@ function parallaxScroll(){
 	if( Math.abs(current_full_page*div_height - parent.scrollTop()) >= div_height ){
 		
 		current_full_page = Math.floor(parent.scrollTop()/div_height);
+		
 		// Call other element's change page functions
 		for(var i = 0; i < newFullPageFunctions.length; i++)
 			newFullPageFunctions[i]();
@@ -88,7 +90,7 @@ function parallaxScroll(){
 	evaulateSnapEffect(); // Snap if we need to
 	
 	// Call other elements's scroll functions
-	for(var i = 0; i < parallaxFunctions.length; i++)
+	for(i = 0; i < parallaxFunctions.length; i++)
 		parallaxFunctions[i]();
 	
 }
