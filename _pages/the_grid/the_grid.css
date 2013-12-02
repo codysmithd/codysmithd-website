@@ -64,6 +64,10 @@
 	color:#FFF;
 }
 
+.the_grid-post-inactive{
+	display:none;
+}
+
 /* NAVIGATION */
 
 #the_grid-navigation_wrapper{
