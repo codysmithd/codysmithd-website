@@ -90,7 +90,7 @@ function parallaxScroll(){
 	evaulateSnapEffect(); // Snap if we need to
 	
 	// Call other elements's scroll functions
-	for(i = 0; i < parallaxFunctions.length; i++)
+	for(var i = 0; i < parallaxFunctions.length; i++)
 		parallaxFunctions[i]();
 	
 }
@@ -107,6 +107,15 @@ function changePage(newPage){
 	// Scroll to the new page (if specified)
 	if(newPage !== undefined && newPage != current_page){
 		parent.animate({ scrollTop: newPage * div_height + "px" }, 600);
+	}
+	
+	// De-activate children of inactive pages
+	for(var i = 0; i < page_divs.length; i++){
+		if(Math.abs(current_page - i) <= 1){
+			page_divs[i].children().css("display", "");
+		}
+		else
+			page_divs[i].children().css("display", "none");
 	}
 	
 	// Call other element's change page functions
