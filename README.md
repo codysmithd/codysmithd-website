@@ -26,7 +26,7 @@ This re-directs all requests to a single document, `index.php`.
 
 `index.php` then includes the pages as components based on the directory structure. Every page is self contained in a directory with the relivent HTML, PHP, CSS, Javascript, and any other assets.
 
-<p align="center"><img src="http://i.imgur.com/Xuim2lI.png" /></p>
+<p align="center"><img src="http://i.imgur.com/XCNZkdK.png" /></p>
 
 Using PHP, the correct pages are included to make the requested page, based on this modular directory structure. To add a page, it's as simple as adding a directory to `_pages`. 
 
