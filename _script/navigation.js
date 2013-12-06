@@ -11,6 +11,10 @@ var readyFunctions       = new Array(); // Array of functions called when the do
 var parallaxFunctions    = new Array(); // Array of functions called when scrolling occurs
 var changePageFunctions  = new Array(); // Array of function called when a new page is detected
 var newFullPageFunctions = new Array(); // Array of function called when a new full page is present
+var URLrules             = new Array(); // Array of function called to decide the URL for a new page
+
+// Variables to optimize
+var heightFromTop = 0;
 
 
 $(document).ready(function() {
@@ -22,10 +26,14 @@ $(document).ready(function() {
 		navlinks[i].removeAttribute("href");
 		// Add the page reference name to pages[]
 		pages.push((navlinks[i].id).replace("link-",""));
-		//find and add the corrisponding frame div
+		// Find and add the corrisponding frame div
 		page_divs.push($(document.getElementById("frame_" + pages[i])));
 		// Add onclick for new navigation
         navlinks[i].setAttribute("onclick", "javascript:changePage(\"" + i + "\")");
+        // Make default URLrule
+        URLrules.push(function(){
+        	window.history.pushState("", "codysmithd", "/" + pages[current_page]);
+        });
 	}
 	
 	// Setup page_div top values
@@ -60,7 +68,10 @@ $(document).ready(function() {
 	window.onmousewheel = document.onmousewheel = document.onkeydown = function(){ parent.stop(); };
 	
 	// Re-evaluate the div_height when the page re-sizes
-	window.onresize = function(){ div_height = page_divs[0].height(); };
+	window.onresize = function(){ 
+		div_height = page_divs[0].height();
+		parallaxScroll();
+	};
 	
 	// Call the other element's ready functions
 	for(var i = 0; i < readyFunctions.length; i++)
@@ -71,16 +82,18 @@ $(document).ready(function() {
 // Called every time the page get a scroll
 function parallaxScroll(){
 	
+	heightFromTop = parent.scrollTop();
+	
 	// If we are more on one page than another
-	if(current_page != Math.round(parent.scrollTop()/div_height)){
-		current_page = Math.round(parent.scrollTop()/div_height);
+	if(current_page != Math.round(heightFromTop/div_height)){
+		current_page = Math.round(heightFromTop/div_height);
 		changePage();
 	}
 	
 	// If we just gave full view to a new page
-	if( Math.abs(current_full_page*div_height - parent.scrollTop()) >= div_height ){
+	if( Math.abs(current_full_page*div_height - heightFromTop) >= div_height ){
 		
-		current_full_page = Math.floor(parent.scrollTop()/div_height);
+		current_full_page = Math.floor(heightFromTop/div_height);
 		
 		// Call other element's change page functions
 		for(var i = 0; i < newFullPageFunctions.length; i++)
@@ -92,17 +105,10 @@ function parallaxScroll(){
 	// Call other elements's scroll functions
 	for(var i = 0; i < parallaxFunctions.length; i++)
 		parallaxFunctions[i]();
-	
 }
 
 // Change the current page
 function changePage(newPage){
-	
-	// Change the URL
-	if(current_page != 0)
-		window.history.pushState("", "codysmithd", "/" + pages[current_page]);
-	else
-		window.history.pushState("", "codysmithd", "/");
 	
 	// Scroll to the new page (if specified)
 	if(newPage !== undefined && newPage != current_page){
@@ -117,6 +123,9 @@ function changePage(newPage){
 		else
 			page_divs[i].children().css("display", "none");
 	}
+	
+	// Change the URL
+	URLrules[current_page]();
 	
 	// Call other element's change page functions
 	for(var i = 0; i < changePageFunctions.length; i++)
