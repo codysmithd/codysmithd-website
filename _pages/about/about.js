@@ -14,7 +14,7 @@ readyFunctions.push(function(){
 // Called every time the page scrolls
 parallaxFunctions.push(function(){
 	if(Math.abs(current_page - about_location_in_pages) <= 1){
-		about_scrolled = parent.scrollTop() - div_height*about_location_in_pages;
+		about_scrolled = heightFromTop - div_height*about_location_in_pages;
 		about_background_layer_1.css("margin-top", about_scrolled*.7);
 		about_background_layer_2.css("margin-top", about_scrolled*.9);
 	}
