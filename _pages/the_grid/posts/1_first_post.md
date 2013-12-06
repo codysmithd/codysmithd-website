@@ -11,7 +11,7 @@ Howdy! Welcome to **The Grid**! This is going to be my blog/place to talk about 
 As of writing this, my website actually isn't even done (although is it *ever*?).
 I’m writing this first post in raw HTML because my markdown parser isn't done.
 I'm going to talk about how I got to where the site is today in the rest of this post, but before I start
-all of my code is actually on <a href="http://www.github.com/codysmithd/codysmithd-website-">Github</a>.
+all of my code is actually on <a href="http://www.github.com/codysmithd/codysmithd-website">Github</a>.
 
 I'll start by talking about what is hosting the site. Most of the time it's hosted off of a Raspberry Pi running Arch Linux.
 I'm a student at RIT and we have awesome on-campus internet that gives us our own subnets. Normally I am forwarding my domain to
