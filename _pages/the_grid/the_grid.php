@@ -26,7 +26,7 @@
 						if($subpage == "")
 							$subpage = substr($subpages[0], strpos($subpages[0], "_")+1, -3);
 						else if(not_in_subpages_array($subpages, $subpage))
-							NOP; //TODO: Re-direct
+							header( 'Location: /404' ) ;
 						
 						// Build Posts
 						foreach($subpages as $x){

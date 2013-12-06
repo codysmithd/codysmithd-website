@@ -21,9 +21,9 @@
 .the_grid-post{
 	display:inline-block;
 	height:80%;
+	width: 100%;
 	/*Leave room for the navbar!*/
 	height:calc(100% - 206px);
-	margin-top:92px;
 	color: #E0E0E0;
 	font-family: 'Arimo', sans-serif;
 	column-width: 400px;
@@ -87,31 +87,28 @@
 	-webkit-transition: .5s;
 	-o-transition:      .5s;
 	width:60px;
-}#the_grid-navigation_wrapper:hover{
-	border-color:#555;
-}#the_grid-navigation_wrapper:hover > .the_grid-navigation_link{
-	border-color:#555;
-}#the_grid-navigation_wrapper:hover > .the_grid-navigation_link-current{
-	background-color:#555;
 }
 
 .the_grid-navigation_link{
 	display:inline-block;
 	width: 20px;
 	height:20px;
-	margin: 5px 0 5px 5px;
+	margin:6px 1px 6px 6px;
 	float:left;
-	border:#333 solid 1px;
+	background-color:#222;
 	cursor:pointer;
 	transition:         .5s;
 	-moz-transition:    .5s;
 	-webkit-transition: .5s;
 	-o-transition:      .5s;
+}.the_grid-navigation_link:hover{
+	background-color:#282828;
 }
 .the_grid-navigation_link-current{
 	background-color:#333;
-	border-style:hidden;
 	margin:6px 1px 6px 6px;
+}.the_grid-navigation_link-current:hover{
+	background-color:#333;
 }
 
 
