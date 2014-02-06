@@ -22,14 +22,17 @@
 	display:inline-block;
 	height:80%;
 	width: 100%;
+	font: 15px Helvetica, arial, freesans, clean, sans-serif;
 	/*Leave room for the navbar!*/
 	height:calc(100% - 206px);
 	color: #E0E0E0;
 	font-family: 'Arimo', sans-serif;
 	column-width: 400px;
+	-webkit-column-width: 400px;
+	-moz-column-width: 400px;
   	column-gap: 15px;
-  	-webkit-column-width: 400px;
   	-webkit-column-gap: 15px;
+  	-moz-column-gap: 15px;
 }
 .the_grid-post > hr{
 	border: 0;
