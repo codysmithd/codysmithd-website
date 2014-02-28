@@ -1,17 +1,32 @@
 <div id= "frame_projects" class="frame">
 	<div style="position:relative; width: 100%; height:100%;">
-		<div style="width:100%; height:100%; display:table; z-index: 5; position: relative;">
-    		<span id="projects-heading" style="display: table-cell; vertical-align: middle; text-align: center;z-index: 5">
-    			Coming Soon
-    			<p>
-    				In the meantime, please check out my
-    				<a href="https://github.com/codysmithd?tab=repositories" style="">GitHub Repositories</a>
-    			</p>
-    		</span>
+		
+		<!-- Centering Content DIV -->
+		<div id="projects-contentDiv-outer">
+    		<div id="projects-contentDiv-middle">
+    			<div id="projects-contentDiv-inner">
+    				
+    				<div id="projects-heading">Coming Soon</div>
+    				<p id="projects-heading-content">In the meantime, please check out my</p>
+    				
+    				<div id="projects-heading-splitdiv">
+    					<a href="http://github.com/codysmithd">
+    						<div id="projects-githubButton" class="projects-heading-buttons">
+    						Github
+    						<img id="projects-githubButton-watermark" src="/_pages/projects/GitHub_watermark.png"/>
+    						</div>
+    					</a>
+    					<a href="http://stackoverflow.com/users/1801220/flynn">
+    						<div id="projects-stackoverflowButton" class="projects-heading-buttons">
+    						Stack Overflow
+    						<img id="projects-stackoverflowButton-watermark" src="/_pages/projects/StackOverflow_watermark.png"/>
+    						</div>
+    					</a>
+    				</div>
+    				
+    			</div>
+    		</div>
     	</div>
-    	<!-- Parallax Triangle layers -->
-		<div id="projects-background_1"> </div>
-		<div id="projects-background_2"> </div>
-		<div id="projects-background_3"> </div>
+		<div id="projects-background"> </div>
 	</div>
 </div>

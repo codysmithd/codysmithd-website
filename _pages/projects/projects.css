@@ -1,52 +1,110 @@
 #frame_projects{
-	background-color: #ebebeb;
+	background-color: #EFEFEF;
 	overflow:hidden;
-}
-
-#projects-heading{
-	color:#959595;
-	color:rgba(0,0,0,0.5);
+	color: #777;
 	font-family: 'Raleway', serif;
-	font-size: 72px;
-	width:100%;
-}#projects-heading > p{
-	 font-size: 16px;
-}#projects-heading > p > a:link{
-	text-decoration:none;
-	color:#33b5e5;
-}#projects-heading > p > a:visited{
-	text-decoration:none;
-	color: #000;
 }
 
-#projects-background_1{
+/* Content DIV */
+#projects-contentDiv-outer{
+	display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    z-index: 5;
+}#projects-contentDiv-middle{
+	display: table-cell;
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+}#projects-contentDiv-inner{
+	margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* Projects Heading */
+#projects-heading{
+	font-size: 80px;
+	font-weight:200;
+	margin: 0;
+}
+#projects-heading-content{
+	letter-spacing: 6px;
+	margin:12px 0 12px 0;
+	padding: 0 0 0 6px;
+}
+#projects-heading-splitdiv{
+	width: 500px;
+	margin: 24px auto 0 auto;
+}
+.projects-heading-buttons{
+	width:calc(50% - 2px);
+	text-align:center;
+	float:left;
+	font-weight:400;
+	font-size:18px;
+	border: 1px solid #777;
+	color: #777;
+	padding: 12px 0 12px 0;
+	cursor:pointer;
+	overflow:hidden;
+	position:relative;
+	transition:         .1s;
+	-moz-transition:    .1s;
+	-webkit-transition: .1s;
+	-o-transition:      .1s;
+}.projects-heading-buttons:hover{
+	background-color:rgba(119,119,119,0.1);
+}.projects-heading-buttons:hover #projects-githubButton-watermark{
+	opacity: 0.1;
+}.projects-heading-buttons:hover #projects-stackoverflowButton-watermark{
+	opacity: 0.1;
+}
+
+#projects-githubButton{
+	border-right-width: 0px;
+}#projects-githubButton-watermark{
+	position:absolute;
+	top:50%;
+	margin-top:-22px;
+	left:50%;
+	margin-left:-22px;
+	z-index: -1;
+	opacity: 0;
+	transition:         .75s;
+	-moz-transition:    .75s;
+	-webkit-transition: .75s;
+	-o-transition:      .75s;
+}
+
+#projects-stackoverflowButton{
+}#projects-stackoverflowButton-watermark{
+	position:absolute;
+	top:50%;
+	margin-top:-22px;
+	left:50%;
+	margin-left:-22px;
+	z-index: -1;
+	opacity: 0;
+	transition:         .75s;
+	-moz-transition:    .75s;
+	-webkit-transition: .75s;
+	-o-transition:      .75s;
+}
+
+
+/* Background layers */
+#projects-background{
 	position:absolute;
 	top:0;
 	width:100%;
 	height:150%;
-	background-image: url(/_pages/projects/projects_background_1.png);
+	background-image: url(/_pages/projects/projects_bg.jpg);
 	background-repeat:repeat;
 	z-index:3;
 }
-
-#projects-background_2{
-	position:absolute;
-	top:0;
-	float:left;
-	width:100%;
-	height:150%;
-	background-image: url(/_pages/projects/projects_background_2.png);
-	background-repeat:repeat;
-	z-index:2;
-}
-
-#projects-background_3{
-	position:absolute;
-	top:0;
-	width:100%;
-	height:150%;
-	background-image: url(/_pages/projects/projects_background_3.png);
-	background-repeat:repeat;
-	z-index:1;
-}
-
