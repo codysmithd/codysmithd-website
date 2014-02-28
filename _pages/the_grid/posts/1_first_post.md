@@ -4,7 +4,7 @@ First Post
 What is this?
 ---
 
-### Date:04/11/2013 (Edited: 11/21/2013)
+### Date: 01/04/2013 (Edited: 11/21/2013)
 
 Howdy! Welcome to **The Grid**! This is going to be my blog/place to talk about some of the things I'm currently working on.
 
