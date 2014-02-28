@@ -13,6 +13,8 @@ readyFunctions.push(function(){
 		window.history.pushState("", "codysmithd", "/");
 	};
 	
+	startSnowstorm(); // from snowstorm.js
+	
 });
 
 // Called every time the page scrolls
@@ -22,6 +24,6 @@ parallaxFunctions.push(function(){
 	if(Math.abs(current_page - home_location_in_pages) <= 1){
 		
 		home_scrolled = heightFromTop - div_height*pages.indexOf("home");
-		home_background_layer.css("margin-top", home_scrolled*.5);
+		home_background_layer.css("margin-top", home_scrolled*0.5);
 	}
 });
