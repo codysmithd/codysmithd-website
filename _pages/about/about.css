@@ -1,5 +1,5 @@
 #frame_about{
-	background:#33B5E5;
+	background:#000;
 	overflow:hidden;
 }
 
@@ -30,6 +30,12 @@
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
+}
+
+#about_video{
+	z-index: 4;
+	position: absolute;
+	top: 0;
 }
 
 #about-background_1{
