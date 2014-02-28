@@ -9,11 +9,12 @@ var scroll_snap_timer;                  // The timer used to decide when to snap
 
 var readyFunctions       = new Array(); // Array of functions called when the document is ready
 var parallaxFunctions    = new Array(); // Array of functions called when scrolling occurs
-var changePageFunctions  = new Array(); // Array of function called when a new page is detected
-var newFullPageFunctions = new Array(); // Array of function called when a new full page is present
-var URLrules             = new Array(); // Array of function called to decide the URL for a new page
+var changePageFunctions  = new Array(); // Array of functions called when a new page is detected
+var newFullPageFunctions = new Array(); // Array of functions called when a new full page is present
+var URLrules             = new Array(); // Array of functions called to decide the URL for a new page
+var resizeFunctions      = new Array(); // Array of functions called when the page re-sizes
 
-// Variables to optimize
+// Variables used in optimization (V1.0)
 var heightFromTop = 0;
 
 
@@ -68,9 +69,15 @@ $(document).ready(function() {
 	window.onmousewheel = document.onmousewheel = document.onkeydown = function(){ parent.stop(); };
 	
 	// Re-evaluate the div_height when the page re-sizes
-	window.onresize = function(){ 
+	window.onresize = function(){
+		
 		div_height = page_divs[0].height();
 		parallaxScroll();
+		
+		// Call other resize functions
+		for(var i = 0; i < resizeFunctions.length; i++)
+		resizeFunctions[i]();
+		
 	};
 	
 	// Call the other element's ready functions
