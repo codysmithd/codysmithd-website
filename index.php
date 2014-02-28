@@ -2,6 +2,17 @@
 <?php ob_start(); ?>
 <html xmlns="http://www.w3.org/1999/xhtml" style="width:100%; height:100%; font-family:Arial, Helvetica, sans-serif;">
 <?php
+	
+	// Way to store the page status
+	abstract class PAGE_STATUS
+	{
+    	const NORMAL = 0;
+    	const ERROR_404 = 1;
+	}
+	
+	// Initilize variables
+	$subpage = "";
+	
 	// Figure out which page has been requested
 	$requested_page = substr($_SERVER['REQUEST_URI'], 1); // Strip off first slash
 	// Find the page (and subpage) part of the URL
@@ -48,32 +59,32 @@
 	<link href='http://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<?php
+		// echo link for all .js in directory (recursive)
+		function printScriptLinkForDir($pathname){
+				$path = realpath($pathname);
+				foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $x){
+					$x = substr($x, 8);
+					if(strpos($x, ".js") !== false){
+						echo "<script type=\"text/javascript\" src=\"$x\"></script>";
+					}
+				}
+			}
+		
 		if($ERROR_404){
 			$path = "_pages";
 			if(file_exists("$path/_404/404.js"))
 				echo "<script type=\"text/javascript\" src=\"/$path/_404/404.js\"></script>";
 		}
 		else{
-			// include _script
-			$path = "_script";
-			foreach(scandir("/var/www/$path") as $x){
+			
+			printScriptLinkForDir("/var/www/_script");
+			printScriptLinkForDir("/var/www/_includes");
+			
+			foreach(scandir("/var/www/_pages") as $x){
 			if($x != '.' and $x != '..' and $x[0] != '_')
-				echo "<script type=\"text/javascript\" src=\"/$path/$x\"></script>";
+				printScriptLinkForDir("/var/www/_pages/$x");
 			}
 			
-			// include _includes javascript
-			$path = "_includes";
-			foreach(scandir("/var/www/$path") as $x){
-			if($x != '.' and $x != '..' and $x[0] != '_' and file_exists("$path/$x/$x.js"))
-				echo "<script type=\"text/javascript\" src=\"/$path/$x/$x.js\"></script>";
-			}
-			
-			// include _pages javascript
-			$path = "_pages";
-			foreach(scandir("/var/www/$path") as $x){
-			if($x != '.' and $x != '..' and $x[0] != '_' and file_exists("$path/$x/$x.js"))
-				echo "<script type=\"text/javascript\" src=\"/$path/$x/$x.js\"></script>";
-			}
 		}
 	?>
 </head>
