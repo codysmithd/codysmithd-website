@@ -14,35 +14,25 @@ readyFunctions.push(function(){
 	grid_background_layer_2 = $("#the_grid-background_2");
 	grid_location_in_pages = pages.indexOf("the_grid");
 	
-	// Navigation variables
-	for(var i=0; i < document.getElementById('the_grid-posts').children.length; i++)
-		grid_posts.push($(document.getElementById('the_grid-posts').children[i]));
-	
-	// URL rules
-	URLrules[grid_location_in_pages] = function(){
-		currently_active = $("#the_grid-posts > :not( .the_grid-post-inactive )");
-		window.history.pushState("", "codysmithd", "/the_grid/" + currently_active.attr("id").substring(14));
-	};
-	
-	// Change to Javascript Navigation
-	$("#the_grid-navigation_wrapper").children().removeAttr("href");
-	
-	for(var i=0; i < document.getElementById('the_grid-navigation_wrapper').children.length; i++){
-			document.getElementById('the_grid-navigation_wrapper')
-				.children[i].setAttribute("onclick", "javascript:changePost(" + i + ")");
-			grid_navLinks.push($(document.getElementById('the_grid-navigation_wrapper').children[i]));
-	}
-	
 });
+
 
 // Called every time the page scrolls
 parallaxFunctions.push(function(){
 	if(Math.abs(current_page - grid_location_in_pages) <= 1){
 		grid_scrolled = heightFromTop - div_height*grid_location_in_pages;
-		grid_background_layer.css("margin-top", grid_scrolled*.3);
-		grid_background_layer_2.css("margin-top", grid_scrolled*.9);
+		grid_background_layer.css("margin-top", grid_scrolled);
 	}
 });
+
+
+// Functions to show and hide the wallpaper relevant to that post
+function hover_event_showWallpaper(postname){
+	$("#the_grid-post-wallpaper_" + postname).css("opacity", "0.5");
+}
+function hover_event_hideWallpaper(postname){
+  	$("#the_grid-post-wallpaper_" + postname).css("opacity", "0");
+}
 
 
 // Navigate to the next post
