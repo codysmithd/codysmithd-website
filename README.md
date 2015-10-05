@@ -1,10 +1,6 @@
-#codysmithd
+#codysmithd.com (*deprecated*)
 
 My personal website. My playground to try new things, write about what I'm doing, and showcase some of the stuff I'm working on.
-
-  [Stage](http://webserver.student.rit.edu "Stage")
-  
-  [Production](http://www.codysmithd.com "Production")
 
 ## How does it work?
 The basic philosophy for the site was to make a simple and adaptable website platform that allows enough freedom to explore some cool website design concepts.
